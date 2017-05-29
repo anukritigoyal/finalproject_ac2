@@ -31,5 +31,5 @@ BuildMap <- function(data, data.year, type) {
       title = 'Mortality Rates in the United States',
       geo = g
     )
+  return(map)
 }
-
