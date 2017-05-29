@@ -1,12 +1,13 @@
 #library(plotly)
 #library(dplyr)
 
-BuildMap <- function(data, data.year, type) {
+BuildMap <- function(data, data.year, data.strat.category, type) {
   data <- data %>% select(YearStart, LocationAbbr, LocationDesc, Topic, DataValue,
                           DataValueType, DataValueUnit, StratificationCategory1, Stratification1)
   
-  data <- data %>% filter(YearStart == data.year) %>% filter(StratificationCategory1 == "Overall") %>%
+  data <- data %>% filter(YearStart == data.year) %>% filter(StratificationCategory1 == data.strat.category) %>%
     filter(DataValueType == "Number") %>% filter(LocationAbbr != "US")
+  
   
   data <- data %>% group_by(LocationAbbr) %>% summarise(newData = sum(DataValue, na.rm = TRUE))
   
