@@ -1,7 +1,8 @@
 # Final project ui
+library(shiny)
 
 shinyUI(navbarPage("Chronic Diseases in the US",
-    tabPanel('Diabetes',
+    tabPanel('Graphics',
              sidebarLayout(
                
                sidebarPanel(
@@ -22,9 +23,15 @@ shinyUI(navbarPage("Chronic Diseases in the US",
                ),
                
                mainPanel(
-                 plotlyOutput("diabetesMap")
+                 tabsetPanel(
+                    tabPanel("Diabetes", plotlyOutput("diabetesMap")),
+                    tabPanel("Pulmonary", plotlyOutput("pulmonaryMap"))
+                 ) 
+                    
                )
                
              )
-    )
+    ),
+    tabPanel('Documentation')
+    
 ))

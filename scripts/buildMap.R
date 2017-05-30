@@ -1,5 +1,5 @@
-#library(plotly)
-#library(dplyr)
+library(plotly)
+library(dplyr)
 
 BuildMap <- function(data, data.year, data.strat.category, data.strat.specific, type) {
   data <- data %>% select(YearStart, LocationAbbr, LocationDesc, Topic, DataValue,

@@ -51,8 +51,21 @@ shinyServer(function(input, output) {
     
     # Previous line of code:
     # mapping <- BuildMap(diabetes, input$diabetes.year, input$dstrat)
-    mapping
+    #mapping
   })
   
+  
+  
+  
+  
+  output$pulmonaryMap <- renderPlotly({
+    if (is.null(input$dstrat.gender) && is.null(input$dstrat.race.ethnicity)) {
+      mapping <- BuildMap(pulmonary, input$diabetes.year, input$dstrat)
+    } else if(is.null(input$dstrat.gender)) {
+      mapping <- BuildMap(pulmonary, input$diabetes.year, input$dstrat, input$dstrat.race.ethnicity)
+    } else {
+      mapping <- BuildMap(pulmonary, input$diabetes.year, input$dstrat, input$dstrat.gender)
+    }
+  })
   
 })
