@@ -13,26 +13,12 @@ shinyUI(navbarPage("Chronic Diseases in the US",
                  
                  selectInput(inputId = "dstrat",label = "Select Stratification",
                              choices = list("Gender" = "Gender", "Race/Ethnicity" = "Race/Ethnicity",
-                                            "Overall" = "Overall")
+                                            "Overall" = "Overall"),
+                             selected = "Overall"
                              ),
                  
-                 # Only show if stratification is gender
-                 conditionalPanel(
-                   condition = "input.dstrat == 'Gender'",
-                   checkboxGroupInput(inputId = "dstrat.gender", label = "Select Gender",
-                                      choices = list("Female" = "Female", "Male" = "Male"))
-                   ),
-                 
-                 # Only show if stratification is race/ethnicity
-                 conditionalPanel(
-                   condition = "input.dstrat == 'Race/Ethnicity'",
-                   checkboxGroupInput(inputId = "dstrat.race.ethnicity", label = "Select Race/Ehtnicity",
-                                      choices = list("American Indian or Alaska Native" = "American Indian or Alaska Native",
-                                                     "Asian or Pacific Islander" = "Asian or Pacific Islander",
-                                                     "Hispanic"= "Hispanic",
-                                                     "Black, non-Hispanic" = "Black, non-Hispanic",
-                                                     "White, non-Hispanic" = "White, non-Hispanic"))
-                   )
+                 uiOutput("myui")
+
                ),
                
                mainPanel(
