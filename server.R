@@ -11,15 +11,17 @@ cardiovascular <- read.csv("./cardiovascular.csv", stringsAsFactors = FALSE)
 diabetes <- read.csv("./diabetes.csv", stringsAsFactors = FALSE)
 pulmonary <- read.csv("./pulmonary.csv", stringsAsFactors = FALSE)
 
-shinyServer(function(input, output, session) {
+shinyServer(function(input, output) {
   
-  output$myui <- renderUI({
-    if(input$dstrat == "Gender") {
-      checkboxGroupInput(inputId = "dstrat.specify", label = "Select Gender",
+  # Generates a dynamic UI that allows users to choose specific stratifications if ether
+  # Gender or Race/Ethnicity is selected
+  output$specificGroups <- renderUI({
+    if(input$stratification == "Gender") {
+      checkboxGroupInput(inputId = "strat.specify", label = "Select Gender",
                          choices = list("Female" = "Female", "Male" = "Male"),
                          selected = c("Female", "Male"))
-    } else if(input$dstrat == "Race/Ethnicity") {
-      checkboxGroupInput(inputId = "dstrat.specify", label = "Select Race/Ethnicity",
+    } else if(input$stratification == "Race/Ethnicity") {
+      checkboxGroupInput(inputId = "strat.specify", label = "Select Race/Ethnicity",
                          choices = list("American Indian or Alaska Native" = "American Indian or Alaska Native",
                                         "Asian or Pacific Islander" = "Asian or Pacific Islander",
                                         "Hispanic"= "Hispanic",
@@ -31,32 +33,26 @@ shinyServer(function(input, output, session) {
   })
   
   output$diabetesMap <- renderPlotly({
-    if (input$dstrat == "Overall") {
-      # Debugging tool:
-      # print(paste0("input$dstrat: ", input$dstrat))
-      mapping <- BuildMap(diabetes, input$diabetes.year, input$dstrat, 23000)
+    if (input$stratification == "Overall") {
+      mapping <- BuildMap(diabetes, input$chosen.year, input$stratification, 23000)
     } else {
-      # Debugging tool:
-      # print(paste0("input$dstrat: ", input$dstrat))
-      # print(paste0("input$dstrat.specify: ", input$dstrat.specify))
-      mapping <- BuildMap(diabetes, input$diabetes.year, input$dstrat.specify, 23000)
+      mapping <- BuildMap(diabetes, input$chosen.year, input$strat.specify, 23000)
     }
   })
   
-  
   output$pulmonaryMap <- renderPlotly({
-    if (input$dstrat == "Overall") {
-      mapping <- BuildMap(pulmonary, input$diabetes.year, input$dstrat, 13000)
+    if (input$stratification == "Overall") {
+      mapping <- BuildMap(pulmonary, input$chosen.year, input$stratification, 13000)
     } else {
-      mapping <- BuildMap(pulmonary, input$diabetes.year, input$dstrat.specify, 13000)
+      mapping <- BuildMap(pulmonary, input$chosen.year, input$strat.specify, 13000)
     }
   })
 
   output$cardiovascularMap <- renderPlotly({
-    if (input$dstrat == "Overall") {
-      mapping <- BuildMap(cardiovascular, input$diabetes.year, input$dstrat, 82000)
+    if (input$stratification == "Overall") {
+      mapping <- BuildMap(cardiovascular, input$chosen.year, input$stratification, 82000)
     } else {
-      mapping <- BuildMap(cardiovascular, input$diabetes.year, input$dstrat.specify, 82000)
+      mapping <- BuildMap(cardiovascular, input$chosen.year, input$strat.specify, 82000)
     }
   })
   

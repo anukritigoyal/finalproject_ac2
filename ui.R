@@ -7,18 +7,18 @@ shinyUI(navbarPage("Chronic Diseases in the US",
                
                sidebarPanel(
                  
-                 sliderInput(inputId = "diabetes.year", label = "Select Year", min = min(diabetes$YearStart),
+                 sliderInput(inputId = "chosen.year", label = "Select Year", min = min(diabetes$YearStart),
                              max = max(diabetes$YearEnd), value = min(diabetes$YearStart), step = 1,
                              sep = ""
                              ),
                  
-                 selectInput(inputId = "dstrat",label = "Select Stratification",
+                 selectInput(inputId = "stratification",label = "Select Stratification",
                              choices = list("Gender" = "Gender", "Race/Ethnicity" = "Race/Ethnicity",
                                             "Overall" = "Overall"),
                              selected = "Overall"
                              ),
                  
-                 uiOutput("myui")
+                 uiOutput("specificGroups")
 
                ),
                
