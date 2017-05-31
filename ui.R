@@ -35,6 +35,14 @@ shinyUI(navbarPage("Chronic Diseases in the US",
                
              )
     ),
-    tabPanel('Documentation')
+    tabPanel('Documentation',
+             mainPanel(
+               h1("Project Documentation"),
+               h5("Created by: Anukriti Goyal, Kristine Ly, Tina Zhuang & Simin Huan"),
+               br(),
+               h2("Project Description")
+               
+             )
+    )
     
 ))

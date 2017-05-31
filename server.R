@@ -54,9 +54,9 @@ shinyServer(function(input, output, session) {
 
   output$cardiovascularMap <- renderPlotly({
     if (input$dstrat == "Overall") {
-      mapping <- BuildMap(cardiovascular, input$diabetes.year, input$dstrat, 81000)
+      mapping <- BuildMap(cardiovascular, input$diabetes.year, input$dstrat, 82000)
     } else {
-      mapping <- BuildMap(cardiovascular, input$diabetes.year, input$dstrat.specify, 81000)
+      mapping <- BuildMap(cardiovascular, input$diabetes.year, input$dstrat.specify, 82000)
     }
   })
   
