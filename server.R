@@ -10,7 +10,7 @@ source("./scripts/buildMap.R")
 cardiovascular <- read.csv("./cardiovascular.csv", stringsAsFactors = FALSE)
 diabetes <- read.csv("./diabetes.csv", stringsAsFactors = FALSE)
 pulmonary <- read.csv("./pulmonary.csv", stringsAsFactors = FALSE)
-
+cardiovascular <- read.csv("./cardiovascular.csv", stringsAsFactors = FALSE)
 
 shinyServer(function(input, output) {
   
@@ -65,6 +65,16 @@ shinyServer(function(input, output) {
       mapping <- BuildMap(pulmonary, input$diabetes.year, input$dstrat, input$dstrat.race.ethnicity)
     } else {
       mapping <- BuildMap(pulmonary, input$diabetes.year, input$dstrat, input$dstrat.gender)
+    }
+  })
+  
+  output$cardiovascularMap <- renderPlotly({
+    if (is.null(input$dstrat.gender) && is.null(input$dstrat.race.ethnicity)) {
+      mapping <- BuildMap(cardiovascular, input$diabetes.year, input$dstrat)
+    } else if(is.null(input$dstrat.gender)) {
+      mapping <- BuildMap(cardiovascular, input$diabetes.year, input$dstrat, input$dstrat.race.ethnicity)
+    } else {
+      mapping <- BuildMap(cardiovascular, input$diabetes.year, input$dstrat, input$dstrat.gender)
     }
   })
   
