@@ -1,7 +1,9 @@
+# Function that builds the visualizations of the map
+
 library(plotly)
 library(dplyr)
 
-BuildMap <- function(data, data.year, data.stratification, type) {
+BuildMap <- function(data, data.year, data.stratification, max) {
   data <- data %>% select(YearStart, LocationAbbr, LocationDesc, Topic, DataValue,
                           DataValueType, DataValueUnit, Stratification1)
   
@@ -27,7 +29,7 @@ BuildMap <- function(data, data.year, data.stratification, type) {
       z = ~newData, color = ~newData,
       locations = ~LocationAbbr, colors = 'Blues'
     ) %>%
-    colorbar(title = "cases per 100,000 people") %>%
+    colorbar(title = "cases per 100,000 people", limits = c(0, max)) %>%
     layout(
       title = 'Mortality Rates in the United States',
       geo = g
