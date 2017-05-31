@@ -10,17 +10,16 @@ source("./scripts/buildMap.R")
 cardiovascular <- read.csv("./cardiovascular.csv", stringsAsFactors = FALSE)
 diabetes <- read.csv("./diabetes.csv", stringsAsFactors = FALSE)
 pulmonary <- read.csv("./pulmonary.csv", stringsAsFactors = FALSE)
-cardiovascular <- read.csv("./cardiovascular.csv", stringsAsFactors = FALSE)
 
 shinyServer(function(input, output, session) {
   
   output$myui <- renderUI({
     if(input$dstrat == "Gender") {
-      checkboxGroupInput(inputId = "dstrat.gender", label = "Select Gender",
+      checkboxGroupInput(inputId = "dstrat.specify", label = "Select Gender",
                          choices = list("Female" = "Female", "Male" = "Male"),
                          selected = c("Female", "Male"))
     } else if(input$dstrat == "Race/Ethnicity") {
-      checkboxGroupInput(inputId = "dstrat.race.ethnicity", label = "Select Race/Ethnicity",
+      checkboxGroupInput(inputId = "dstrat.specify", label = "Select Race/Ethnicity",
                          choices = list("American Indian or Alaska Native" = "American Indian or Alaska Native",
                                         "Asian or Pacific Islander" = "Asian or Pacific Islander",
                                         "Hispanic"= "Hispanic",
@@ -32,55 +31,32 @@ shinyServer(function(input, output, session) {
   })
   
   output$diabetesMap <- renderPlotly({
-    if (is.null(input$dstrat.gender) && is.null(input$dstrat.race.ethnicity)) {
-      # Debugging tools  filtering by overall
-      print(paste0("input$dstrat: ", input$dstrat))
-      print(paste0("input$dstrat.gender: ", input$dstrat.gender))
-      print(paste0("input$dstrat.race.ethnicity ", input$dstrat.race.ethnicity))
-
+    if (input$dstrat == "Overall") {
+      # Debugging tool:
+      # print(paste0("input$dstrat: ", input$dstrat))
       mapping <- BuildMap(diabetes, input$diabetes.year, input$dstrat)
-    } else if(!is.null(input$dstrat.gender)) {
-      # Debugging tools   filter by gender
-      print(paste0("input$dstrat: ", input$dstrat))
-      print(paste0("input$dstrat.gender: ", input$dstrat.gender))
-      print(paste0("input$dstrat.race.ethnicity ", input$dstrat.race.ethnicity))
-
-      mapping <- BuildMap(diabetes, input$diabetes.year, input$dstrat.gender)
     } else {
-      # Debugging tools   filter by race/ethnicity
-      print(paste0("input$dstrat: ", input$dstrat))
-      print(paste0("input$dstrat.gender: ", input$dstrat.gender))
-      print(paste0("input$dstrat.race.ethnicity ", input$dstrat.race.ethnicity))
-
-      mapping <- BuildMap(diabetes, input$diabetes.year, input$dstrat.race.ethnicity)
+      # Debugging tool:
+      # print(paste0("input$dstrat: ", input$dstrat))
+      # print(paste0("input$dstrat.specify: ", input$dstrat.specify))
+      mapping <- BuildMap(diabetes, input$diabetes.year, input$dstrat.specify)
     }
-    
-    # Previous line of code:
-    # mapping <- BuildMap(diabetes, input$diabetes.year, input$dstrat)
-    #mapping
   })
-  
-  
-  
   
   
   output$pulmonaryMap <- renderPlotly({
-    if (is.null(input$dstrat.gender) && is.null(input$dstrat.race.ethnicity)) {
+    if (input$dstrat == "Overall") {
       mapping <- BuildMap(pulmonary, input$diabetes.year, input$dstrat)
-    } else if(is.null(input$dstrat.gender)) {
-      mapping <- BuildMap(pulmonary, input$diabetes.year, input$dstrat, input$dstrat.race.ethnicity)
     } else {
-      mapping <- BuildMap(pulmonary, input$diabetes.year, input$dstrat, input$dstrat.gender)
+      mapping <- BuildMap(pulmonary, input$diabetes.year, input$dstrat.specify)
     }
   })
-  
+
   output$cardiovascularMap <- renderPlotly({
-    if (is.null(input$dstrat.gender) && is.null(input$dstrat.race.ethnicity)) {
+    if (input$dstrat == "Overall") {
       mapping <- BuildMap(cardiovascular, input$diabetes.year, input$dstrat)
-    } else if(is.null(input$dstrat.gender)) {
-      mapping <- BuildMap(cardiovascular, input$diabetes.year, input$dstrat, input$dstrat.race.ethnicity)
     } else {
-      mapping <- BuildMap(cardiovascular, input$diabetes.year, input$dstrat, input$dstrat.gender)
+      mapping <- BuildMap(cardiovascular, input$diabetes.year, input$dstrat.specify)
     }
   })
   

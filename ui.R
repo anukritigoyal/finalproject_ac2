@@ -23,6 +23,7 @@ shinyUI(navbarPage("Chronic Diseases in the US",
                ),
                
                mainPanel(
+                 
                  tabsetPanel(
                     tabPanel("Diabetes", plotlyOutput("diabetesMap")),
                     tabPanel("Pulmonary", plotlyOutput("pulmonaryMap")),
