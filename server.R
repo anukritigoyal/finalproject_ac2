@@ -12,7 +12,7 @@ diabetes <- read.csv("./diabetes.csv", stringsAsFactors = FALSE)
 pulmonary <- read.csv("./pulmonary.csv", stringsAsFactors = FALSE)
 cardiovascular <- read.csv("./cardiovascular.csv", stringsAsFactors = FALSE)
 
-shinyServer(function(input, output) {
+shinyServer(function(input, output, session) {
   
   output$myui <- renderUI({
     if(input$dstrat == "Gender") {
@@ -33,20 +33,26 @@ shinyServer(function(input, output) {
   
   output$diabetesMap <- renderPlotly({
     if (is.null(input$dstrat.gender) && is.null(input$dstrat.race.ethnicity)) {
-      # Debugging tools
-      # print("both are null")
-      # print(is.null(input$dstrat.gender))
+      # Debugging tools  filtering by overall
+      print(paste0("input$dstrat: ", input$dstrat))
+      print(paste0("input$dstrat.gender: ", input$dstrat.gender))
+      print(paste0("input$dstrat.race.ethnicity ", input$dstrat.race.ethnicity))
+
       mapping <- BuildMap(diabetes, input$diabetes.year, input$dstrat)
-    } else if(is.null(input$dstrat.gender)) {
-      # Debugging tools
-      # print("gender is null")
-      # print(is.null(input$dstrat.gender))
-      mapping <- BuildMap(diabetes, input$diabetes.year, input$dstrat, input$dstrat.race.ethnicity)
+    } else if(!is.null(input$dstrat.gender)) {
+      # Debugging tools   filter by gender
+      print(paste0("input$dstrat: ", input$dstrat))
+      print(paste0("input$dstrat.gender: ", input$dstrat.gender))
+      print(paste0("input$dstrat.race.ethnicity ", input$dstrat.race.ethnicity))
+
+      mapping <- BuildMap(diabetes, input$diabetes.year, input$dstrat.gender)
     } else {
-      # Debugging tools
-      # print("race/ethnicty is null")
-      # print(is.null(input$dstrat.race.ethnicity))
-      mapping <- BuildMap(diabetes, input$diabetes.year, input$dstrat, input$dstrat.gender)
+      # Debugging tools   filter by race/ethnicity
+      print(paste0("input$dstrat: ", input$dstrat))
+      print(paste0("input$dstrat.gender: ", input$dstrat.gender))
+      print(paste0("input$dstrat.race.ethnicity ", input$dstrat.race.ethnicity))
+
+      mapping <- BuildMap(diabetes, input$diabetes.year, input$dstrat.race.ethnicity)
     }
     
     # Previous line of code:
