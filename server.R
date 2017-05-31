@@ -34,29 +34,29 @@ shinyServer(function(input, output, session) {
     if (input$dstrat == "Overall") {
       # Debugging tool:
       # print(paste0("input$dstrat: ", input$dstrat))
-      mapping <- BuildMap(diabetes, input$diabetes.year, input$dstrat)
+      mapping <- BuildMap(diabetes, input$diabetes.year, input$dstrat, 23000)
     } else {
       # Debugging tool:
       # print(paste0("input$dstrat: ", input$dstrat))
       # print(paste0("input$dstrat.specify: ", input$dstrat.specify))
-      mapping <- BuildMap(diabetes, input$diabetes.year, input$dstrat.specify)
+      mapping <- BuildMap(diabetes, input$diabetes.year, input$dstrat.specify, 23000)
     }
   })
   
   
   output$pulmonaryMap <- renderPlotly({
     if (input$dstrat == "Overall") {
-      mapping <- BuildMap(pulmonary, input$diabetes.year, input$dstrat)
+      mapping <- BuildMap(pulmonary, input$diabetes.year, input$dstrat, 13000)
     } else {
-      mapping <- BuildMap(pulmonary, input$diabetes.year, input$dstrat.specify)
+      mapping <- BuildMap(pulmonary, input$diabetes.year, input$dstrat.specify, 13000)
     }
   })
 
   output$cardiovascularMap <- renderPlotly({
     if (input$dstrat == "Overall") {
-      mapping <- BuildMap(cardiovascular, input$diabetes.year, input$dstrat)
+      mapping <- BuildMap(cardiovascular, input$diabetes.year, input$dstrat, 81000)
     } else {
-      mapping <- BuildMap(cardiovascular, input$diabetes.year, input$dstrat.specify)
+      mapping <- BuildMap(cardiovascular, input$diabetes.year, input$dstrat.specify, 81000)
     }
   })
   
