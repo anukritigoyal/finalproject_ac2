@@ -40,9 +40,9 @@ shinyServer(function(input, output) {
   
   output$pulmonaryMap <- renderPlotly({
     if (input$stratification == "Overall") {
-      mapping <- BuildMap(pulmonary, input$chosen.year, input$stratification, 13000)
+      mapping <- BuildMap(pulmonary, input$chosen.year, input$stratification, 14000)
     } else {
-      mapping <- BuildMap(pulmonary, input$chosen.year, input$strat.specify, 13000)
+      mapping <- BuildMap(pulmonary, input$chosen.year, input$strat.specify, 14000)
     }
   })
 
