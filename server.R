@@ -17,18 +17,16 @@ shinyServer(function(input, output) {
   # Gender or Race/Ethnicity is selected
   output$specificGroups <- renderUI({
     if(input$stratification == "Gender") {
-      checkboxGroupInput(inputId = "strat.specify", label = "Select Gender",
-                         choices = list("Female" = "Female", "Male" = "Male"),
-                         selected = c("Female", "Male"))
+      radioButtons(inputId = "strat.specify", label = "Select Gender",
+                   choices = list("Female" = "Female", "Male" = "Male"),
+                   selected = "Female")
     } else if(input$stratification == "Race/Ethnicity") {
-      checkboxGroupInput(inputId = "strat.specify", label = "Select Race/Ethnicity",
-                         choices = list("American Indian or Alaska Native" = "American Indian or Alaska Native",
-                                        "Asian or Pacific Islander" = "Asian or Pacific Islander",
-                                        "Hispanic"= "Hispanic",
-                                        "Black, non-Hispanic" = "Black, non-Hispanic",
-                                        "White, non-Hispanic" = "White, non-Hispanic"),
-                         selected = c("American Indian or Alaska Native", "Asian or Pacific Islander",
-                                      "Hispanic", "Black, non-Hispanic", "White, non-Hispanic"))
+      radioButtons(inputId = "strat.specify", label = "Select Race/Ethnicity",
+                   choices = list("American Indian or Alaska Native" = "American Indian or Alaska Native",
+                                  "Asian or Pacific Islander" = "Asian or Pacific Islander",
+                                  "Hispanic"= "Hispanic", "Black, non-Hispanic" = "Black, non-Hispanic",
+                                  "White, non-Hispanic" = "White, non-Hispanic"),
+                   selected = "American Indian or Alaska Native")
     }
   })
   
