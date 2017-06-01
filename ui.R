@@ -9,7 +9,18 @@ shinyUI(navbarPage(theme = shinytheme("cerulean"),
     
     # Creates tabs for the different data being displayed
     tabPanel('Overview',
-           includeMarkdown("overview.Rmd")
+             sidebarLayout(
+               sidebarPanel(
+                 sliderInput(inputId = "year", label = "Select Year", min = min(diabetes$YearStart),
+                             max = max(diabetes$YearEnd), value = min(diabetes$YearStart), step = 1,
+                             sep = ""
+                             )
+               ),
+               mainPanel(
+                 plotlyOutput("overviewMap", width = "100%")
+               )
+             )
+            #includeMarkdown("overview.Rmd")
     ),
     tabPanel('Graphics',
              # Creates widgets for the sidebar that allows users to select the specific information they want to see 

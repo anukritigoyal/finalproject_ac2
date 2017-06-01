@@ -6,6 +6,7 @@ library(shiny)
 
 source("./scripts/buildMap.R")
 source("./scripts/highestMortality.R")
+source("./scripts/buildPlot.R")
 
 # Reads in relevant data
 cardiovascular <- read.csv("./cardiovascular.csv", stringsAsFactors = FALSE)
@@ -29,6 +30,10 @@ shinyServer(function(input, output) {
                                   "White, non-Hispanic" = "White, non-Hispanic"),
                    selected = "American Indian or Alaska Native")
     }
+  })
+  
+  output$overviewMap <- renderPlotly({
+    graph <- BuildGraph(diabetes, pulmonary, cardiovascular, input$year)
   })
   
 
