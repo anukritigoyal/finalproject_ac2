@@ -1,5 +1,5 @@
 # Final project ui
-#install.packages("shinythemes")
+
 library(shinythemes)
 library(shiny)
 library(markdown)
@@ -32,9 +32,15 @@ shinyUI(navbarPage(theme = shinytheme("cerulean"),
                mainPanel(
                  
                  tabsetPanel(
-                    tabPanel("Diabetes", br(), br(), plotlyOutput("diabetesMap")),
-                    tabPanel("Pulmonary", br(), br(),plotlyOutput("pulmonaryMap")),
-                    tabPanel("Cardiovascular", br(), br(),plotlyOutput("cardiovascularMap"))
+                    tabPanel("Diabetes", br(), br(), plotlyOutput("diabetesMap"),
+                             p("Diabetes is the seventh leading cause of death in the United States and its occurrence has almost doubled 
+                               in the past 20 years.It is projected by the CDC that 1 in 3 adults could have diabetes by 2050.")),
+                    tabPanel("Pulmonary", br(), br(),plotlyOutput("pulmonaryMap"),
+                             p("Chronic Obstructive Pulmonary Disease (COPD) is the third leading cause of death in the United States 
+                               as almost 6.4% of the population had been diagnosed with it in 2014.")),
+                    tabPanel("Cardiovascular", br(), br(),plotlyOutput("cardiovascularMap"),
+                             p("In the United States, about every 1 in 4 deaths each year are due to Cardiovascular Disease. 
+                               Every year, about 735,000 Americans suffer from a heart attack."))
                     
                  ) 
                     
@@ -43,19 +49,6 @@ shinyUI(navbarPage(theme = shinytheme("cerulean"),
              )
     ),
     tabPanel('Documentation',
-<<<<<<< HEAD
           includeMarkdown("documentation.Rmd")
     )       
 ))
-=======
-          includeMarkdown("document.Rmd")
-    )
-  
-  
-    
-   
-))
-
-
-# The purpose of the project, source of the data, and any pertinent information about the topic area are introduced. You may also want to include links to the code, or information about the team.
->>>>>>> new
