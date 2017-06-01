@@ -4,6 +4,11 @@ runtime: shiny
 output: html_document
 ---
 
+Diabetes is the seventh leading cause of death in the United States and its occurrence has almost doubled in the past 20 years.It is projected by the CDC that 1 in 3 adults could have diabetes by 2050. 
 
 
 
+Chronic Obstructive Pulmonary Disease (COPD) is the third leading cause of death in the United States as almost 6.4% of the population had been diagnosed with it in 2014. 
+
+
+In the United States, about every 1 in 4 deaths each year are due to Cardiovascular Disease. Every year, about 735,000 Americans suffer from a heart attack.
