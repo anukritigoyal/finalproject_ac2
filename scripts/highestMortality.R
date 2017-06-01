@@ -1,5 +1,4 @@
-# Finds the highest number of deaths in the given dataframe, based on the
-# selected stratification
+# Finds the highest number of deaths in the given data, based on the selected stratification
 
 library(dplyr)
 

@@ -40,30 +40,32 @@ shinyServer(function(input, output) {
   # Creates the map for Diabetes
   output$diabetesMap <- renderPlotly({
     if (input$stratification == "Overall") {
-      mapping <- BuildMap(diabetes, input$chosen.year, input$stratification, 23000)
+      mapping <- BuildMap(diabetes, input$chosen.year, input$stratification, 23000, "Diabetes")
     } else {
       diabetes.maximum <- HighestMortality(diabetes, input$strat.specify)
-      mapping <- BuildMap(diabetes, input$chosen.year, input$strat.specify, diabetes.maximum)
+      mapping <- BuildMap(diabetes, input$chosen.year, input$strat.specify, diabetes.maximum, "Diabetes")
     }
   })
   
   # Creates the map for Chronic Obstructive Pulmonary Disease
   output$pulmonaryMap <- renderPlotly({
     if (input$stratification == "Overall") {
-      mapping <- BuildMap(pulmonary, input$chosen.year, input$stratification, 14000)
+      mapping <- BuildMap(pulmonary, input$chosen.year, input$stratification, 14000, "COPD")
     } else {
       pulmonary.maxiumum <- HighestMortality(pulmonary, input$strat.specify)
-      mapping <- BuildMap(pulmonary, input$chosen.year, input$strat.specify, pulmonary.maxiumum)
+      mapping <- BuildMap(pulmonary, input$chosen.year, input$strat.specify, pulmonary.maxiumum, "COPD")
     }
   })
 
   # Creates the map for Cardiovascular Disease
   output$cardiovascularMap <- renderPlotly({
     if (input$stratification == "Overall") {
-      mapping <- BuildMap(cardiovascular, input$chosen.year, input$stratification, 82000)
+      mapping <- BuildMap(cardiovascular, input$chosen.year, input$stratification, 82000,
+                          "Cardiovascular Disease")
     } else {
       cardiovascular.maximum <- HighestMortality(cardiovascular, input$strat.specify)
-      mapping <- BuildMap(cardiovascular, input$chosen.year, input$strat.specify, cardiovascular.maximum)
+      mapping <- BuildMap(cardiovascular, input$chosen.year, input$strat.specify, cardiovascular.maximum,
+                          "Cardiovascular Disease")
     }
   })
   

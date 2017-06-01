@@ -4,7 +4,7 @@ library(plotly)
 library(dplyr)
 
 # Function takes in the data set for the disease, the year and stratification of concern
-BuildMap <- function(data, data.year, data.stratification, max) {
+BuildMap <- function(data, data.year, data.stratification, max, graph.title) {
   
   # Filters the data so that the dataframe consists of relevant data that will be used in the plot
   data <- data %>% select(YearStart, LocationAbbr, LocationDesc, Topic, DataValue,
@@ -33,9 +33,9 @@ BuildMap <- function(data, data.year, data.stratification, max) {
       z = ~newData, color = ~newData,
       locations = ~LocationAbbr, colors = 'Blues'
     ) %>%
-    colorbar(title = "cases per 100,000 people", limits = c(0, max)) %>%
+    colorbar(title = "Cases", limits = c(0, max)) %>%
     layout(
-      title = 'Mortality Rates in the United States',
+      title = paste0('Mortality in the United States due to ', graph.title),
       geo = g
     )
   return(map)
