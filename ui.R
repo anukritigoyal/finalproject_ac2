@@ -1,6 +1,8 @@
 # Final project ui
+#install.packages("shinythemes")
 library(shinythemes)
 library(shiny)
+library(markdown)
 
 shinyUI(navbarPage(theme = shinytheme("cerulean"),
   "Chronic Diseases in the US",
@@ -30,9 +32,9 @@ shinyUI(navbarPage(theme = shinytheme("cerulean"),
                mainPanel(
                  
                  tabsetPanel(
-                    tabPanel("Diabetes", plotlyOutput("diabetesMap")),
-                    tabPanel("Pulmonary", plotlyOutput("pulmonaryMap")),
-                    tabPanel("Cardiovascular", plotlyOutput("cardiovascularMap"))
+                    tabPanel("Diabetes", br(), br(), plotlyOutput("diabetesMap")),
+                    tabPanel("Pulmonary", br(), br(),plotlyOutput("pulmonaryMap")),
+                    tabPanel("Cardiovascular", br(), br(),plotlyOutput("cardiovascularMap"))
                     
                  ) 
                     
@@ -41,6 +43,19 @@ shinyUI(navbarPage(theme = shinytheme("cerulean"),
              )
     ),
     tabPanel('Documentation',
+<<<<<<< HEAD
           includeMarkdown("documentation.Rmd")
     )       
 ))
+=======
+          includeMarkdown("document.Rmd")
+    )
+  
+  
+    
+   
+))
+
+
+# The purpose of the project, source of the data, and any pertinent information about the topic area are introduced. You may also want to include links to the code, or information about the team.
+>>>>>>> new

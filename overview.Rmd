@@ -4,8 +4,13 @@ runtime: shiny
 output: html_document
 ---
 
+<<<<<<< HEAD
 Diabetes is the seventh leading cause of death in the United States and its occurrence has almost doubled in the past 20 years.It is projected by the CDC that 1 in 3 adults could have diabetes by 2050. 
+=======
+## Chronic Disease Indicators Overview
+>>>>>>> new
 
+The chronic disease indicators (CDI) are a set of surveillance indicators developed by consensus among CDC, the Council of State and Territorial Epidemiologists (CSTE), and the National Association of Chronic Disease Directors (NACDD). CDI enables public health professionals and policymakers to retrieve uniformly defined state and selected metropolitan-level data for chronic diseases and risk factors that have a substantial impact on public health. These indicators are essential for surveillance, prioritization, and evaluation of public health interventions.([More](https://www.cdc.gov/cdi/overview.html)) 
 
 
 Chronic Obstructive Pulmonary Disease (COPD) is the third leading cause of death in the United States as almost 6.4% of the population had been diagnosed with it in 2014. 
