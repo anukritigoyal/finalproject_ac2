@@ -7,7 +7,18 @@ library(markdown)
 shinyUI(navbarPage(theme = shinytheme("cerulean"),
   "Chronic Diseases in the US",
     tabPanel('Overview',
-           includeMarkdown("overview.Rmd")
+        
+               
+        sidebarPanel( 
+             sliderInput(inputId = "chosen.year", label = "Select Year", min = min(diabetes$YearStart),
+                         max = max(diabetes$YearEnd), value = min(diabetes$YearStart), step = 1,
+                         sep = ""
+             
+        )),
+        mainPanel(plotlyOutput("mainPlot"),br(), br(), br(),br(), br()),
+                
+             includeMarkdown("overview.Rmd")
+        
     ),
     tabPanel('Graphics',
              sidebarLayout(
@@ -58,6 +69,8 @@ shinyUI(navbarPage(theme = shinytheme("cerulean"),
              )
     ),
     tabPanel('Documentation',
+
           includeMarkdown("documentation.Rmd")
     )       
 ))
+

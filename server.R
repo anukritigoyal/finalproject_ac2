@@ -54,4 +54,17 @@ shinyServer(function(input, output) {
     }
   })
   
+  output$mainPlot <- renderPlotly({
+    if (input$chosen.year == "2010") {
+      mapping <- BuildPlot(diabetes, cardiovascular, pulmonary, "2010")
+    } else if(input$chosen.year == "2011"){
+      mapping <- BuildPlot(diabetes, cardiovascular, pulmonary, "2011")
+    } else if (input$chosen.year == "2012"){
+      mapping <- BuildPlot(diabetes, cardiovascular, pulmonary, "2012")
+    } else if(input$chosen.year == "2013"){
+      mapping <- BuildPlot(diabetes, cardiovascular, pulmonary, "2013")
+    } else if(input$chosen.year == "2014"){
+        mapping <- BuildPlot(diabetes, cardiovascular, pulmonary, "2014")
+    }
+  })
 })
