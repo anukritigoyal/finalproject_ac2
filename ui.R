@@ -38,15 +38,12 @@ shinyUI(navbarPage(theme = shinytheme("cerulean"),
              )
     ),
     tabPanel('Documentation',
-
-
-                 includeMarkdown("document.Rmd")
-               )
-             
+          includeMarkdown("document.Rmd")
+    ),
+    tabPanel('Overview',
+           includeMarkdown("overview.Rmd"))         
     
-
-
-    
+   
 ))
 
 
