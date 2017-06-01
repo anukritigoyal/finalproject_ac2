@@ -6,7 +6,7 @@ library(shiny)
 
 source("./scripts/buildMap.R")
 
-# Data
+# Reads in relevant data
 cardiovascular <- read.csv("./cardiovascular.csv", stringsAsFactors = FALSE)
 diabetes <- read.csv("./diabetes.csv", stringsAsFactors = FALSE)
 pulmonary <- read.csv("./pulmonary.csv", stringsAsFactors = FALSE)
@@ -30,6 +30,7 @@ shinyServer(function(input, output) {
     }
   })
   
+  # Creates the map for Diabetes
   output$diabetesMap <- renderPlotly({
     if (input$stratification == "Overall") {
       mapping <- BuildMap(diabetes, input$chosen.year, input$stratification, 23000)
@@ -38,6 +39,7 @@ shinyServer(function(input, output) {
     }
   })
   
+  # Creates the map for Chronic Obstructive Pulmonary Disease
   output$pulmonaryMap <- renderPlotly({
     if (input$stratification == "Overall") {
       mapping <- BuildMap(pulmonary, input$chosen.year, input$stratification, 14000)
@@ -46,6 +48,7 @@ shinyServer(function(input, output) {
     }
   })
 
+  # Creates the map for Cardiovascular Disease
   output$cardiovascularMap <- renderPlotly({
     if (input$stratification == "Overall") {
       mapping <- BuildMap(cardiovascular, input$chosen.year, input$stratification, 82000)
@@ -54,17 +57,4 @@ shinyServer(function(input, output) {
     }
   })
   
-  output$mainPlot <- renderPlotly({
-    if (input$chosen.year == "2010") {
-      mapping <- BuildPlot(diabetes, cardiovascular, pulmonary, "2010")
-    } else if(input$chosen.year == "2011"){
-      mapping <- BuildPlot(diabetes, cardiovascular, pulmonary, "2011")
-    } else if (input$chosen.year == "2012"){
-      mapping <- BuildPlot(diabetes, cardiovascular, pulmonary, "2012")
-    } else if(input$chosen.year == "2013"){
-      mapping <- BuildPlot(diabetes, cardiovascular, pulmonary, "2013")
-    } else if(input$chosen.year == "2014"){
-        mapping <- BuildPlot(diabetes, cardiovascular, pulmonary, "2014")
-    }
-  })
 })

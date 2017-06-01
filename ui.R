@@ -6,25 +6,15 @@ library(markdown)
 
 shinyUI(navbarPage(theme = shinytheme("cerulean"),
   "Chronic Diseases in the US",
+    
+    # Creates tabs for the different data being displayed
     tabPanel('Overview',
-        
-               
-        sidebarPanel( 
-             sliderInput(inputId = "chosen.year", label = "Select Year", min = min(diabetes$YearStart),
-                         max = max(diabetes$YearEnd), value = min(diabetes$YearStart), step = 1,
-                         sep = ""
-             
-        )),
-        mainPanel(plotlyOutput("mainPlot"),br(), br(), br(),br(), br()),
-                
-             includeMarkdown("overview.Rmd")
-        
+           includeMarkdown("overview.Rmd")
     ),
     tabPanel('Graphics',
+             # Creates widgets for the sidebar that allows users to select the specific information they want to see 
              sidebarLayout(
-               
                sidebarPanel(
-                 
                  sliderInput(inputId = "chosen.year", label = "Select Year", min = min(diabetes$YearStart),
                              max = max(diabetes$YearEnd), value = min(diabetes$YearStart), step = 1,
                              sep = ""
@@ -37,9 +27,9 @@ shinyUI(navbarPage(theme = shinytheme("cerulean"),
                              ),
                  
                  uiOutput("specificGroups")
-
                ),
                
+               # Creates the map and a description of the data on the main panel of the page
                mainPanel(
                  tabsetPanel(
                     tabPanel("Diabetes", br(), br(), plotlyOutput("diabetesMap"),
@@ -62,14 +52,10 @@ shinyUI(navbarPage(theme = shinytheme("cerulean"),
                                Mortality rates slowly increased from 2010 to 2014, however in states such as California and New York, 
                                the mortality rate decreased from 2013 to 2014."))
                  ) 
-                    
                )
-               
              )
     ),
     tabPanel('Documentation',
-
           includeMarkdown("documentation.Rmd")
     )       
 ))
-
