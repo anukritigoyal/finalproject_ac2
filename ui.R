@@ -3,6 +3,7 @@
 library(shinythemes)
 library(shiny)
 library(markdown)
+library(plotly)
 
 shinyUI(navbarPage(theme = shinytheme("cerulean"),
   "Chronic Diseases in the US",
