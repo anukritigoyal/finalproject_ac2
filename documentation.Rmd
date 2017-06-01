@@ -1,0 +1,17 @@
+---
+title: "Project Documentation"
+runtime: shiny
+output: html_document
+---
+## Project Documentation
+Created by: Anukriti Goyal, Kristine Ly, Tina Zhuang & Simin Huan
+
+### Purpose
+
+The purpose of our project was to depict the relationship between the existence of chronic diseases and the different states that they exist in, as well as the different groups of people the diseases affect annually. We chose to focus on Diabetes, Chronic Obstructive Pulmonary Disease and Cardiovascular Disease as they had the most annual indicators of mortality in the United States. We were interested in seeing the change in the mortality rate as developments in healthcare advanced over the years and health officials continuous actions lead to improvements in healthcare services.
+
+### Data Source
+
+The data set that we worked with can be found [here](https://catalog.data.gov/dataset/u-s-chronic-disease-indicators-cdi-e50c9).
+
+The information was found in the Health section of Data.gov, however, it was initially published by the Centers for Disease Control and Prevention.
