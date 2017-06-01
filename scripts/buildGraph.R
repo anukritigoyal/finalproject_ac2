@@ -1,3 +1,5 @@
+# Builds a bar chart showing the mortality in each state due to a chronic disease in a given year
+
 library(plotly)
 library(dplyr)
 

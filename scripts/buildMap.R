@@ -15,7 +15,7 @@ BuildMap <- function(data, data.year, data.stratification, max, graph.title) {
   
   data <- data %>% group_by(LocationAbbr) %>% summarise(newData = sum(DataValue, na.rm = TRUE))
   
-  # Properties of the choloropleth map
+  # Properties of the choropleth map
   g <- list (
     scope = 'usa',
     projection = list(type = 'albers usa'),

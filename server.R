@@ -6,7 +6,7 @@ library(shiny)
 
 source("./scripts/buildMap.R")
 source("./scripts/highestMortality.R")
-source("./scripts/buildPlot.R")
+source("./scripts/buildGraph.R")
 
 # Reads in relevant data
 cardiovascular <- read.csv("./cardiovascular.csv", stringsAsFactors = FALSE)
