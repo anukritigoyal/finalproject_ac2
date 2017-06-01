@@ -3,18 +3,6 @@ title: "overview"
 runtime: shiny
 output: html_document
 ---
+## Overview
 
-<<<<<<< HEAD
-<<<<<<< HEAD
- 
-=======
-=======
-
-Diabetes is the seventh leading cause of death in the United States and its occurrence has almost doubled in the past 20 years.It is projected by the CDC that 1 in 3 adults could have diabetes by 2050. 
-
->>>>>>> buildplot
-## Chronic Disease Indicators Overview
-
-
-The chronic disease indicators (CDI) are a set of surveillance indicators developed by consensus among CDC, the Council of State and Territorial Epidemiologists (CSTE), and the National Association of Chronic Disease Directors (NACDD). CDI enables public health professionals and policymakers to retrieve uniformly defined state and selected metropolitan-level data for chronic diseases and risk factors that have a substantial impact on public health. These indicators are essential for surveillance, prioritization, and evaluation of public health interventions.([More](https://www.cdc.gov/cdi/overview.html)) 
-
+Diabetes, Cardiovascular Disease and Chronic Obstructive Pulmonary Disease are all diseases that greatly affect mortality rates in the United States annually. This resource shows how these diseases vary in different states as well as specific groups of people such as males, females and people of different race and ethnicities. It shows how the numbers have changed over time from 2010 to 2014. The graphic above shows the combined mortality rates for all three diseases for different time periods. Data specific to each disease can be seen under the "Graphics" tab. Information pertaining to the purpose of our research and the source of our data can be found under the "Documentation" tab.

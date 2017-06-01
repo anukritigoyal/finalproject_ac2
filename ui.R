@@ -19,8 +19,8 @@ shinyUI(navbarPage(theme = shinytheme("cerulean"),
                mainPanel(
                  plotlyOutput("overviewMap", width = "100%")
                )
-             )
-            #includeMarkdown("overview.Rmd")
+             ),
+            includeMarkdown("overview.Rmd")
     ),
     tabPanel('Graphics',
              # Creates widgets for the sidebar that allows users to select the specific information they want to see 
