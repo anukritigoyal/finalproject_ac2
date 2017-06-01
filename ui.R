@@ -1,7 +1,9 @@
 # Final project ui
+library(shinythemes)
 library(shiny)
 
-shinyUI(navbarPage("Chronic Diseases in the US",
+shinyUI(navbarPage(theme = shinytheme("cerulean"),
+  "Chronic Diseases in the US",
     tabPanel('Graphics',
              sidebarLayout(
                
