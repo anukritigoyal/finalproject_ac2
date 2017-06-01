@@ -4,6 +4,9 @@ library(shiny)
 
 shinyUI(navbarPage(theme = shinytheme("cerulean"),
   "Chronic Diseases in the US",
+    tabPanel('Overview',
+           includeMarkdown("overview.Rmd")
+    ),
     tabPanel('Graphics',
              sidebarLayout(
                
@@ -38,17 +41,6 @@ shinyUI(navbarPage(theme = shinytheme("cerulean"),
              )
     ),
     tabPanel('Documentation',
-          includeMarkdown("document.Rmd")
-    ),
-    tabPanel('Overview',
-           includeMarkdown("overview.Rmd"))         
-    
-<<<<<<< HEAD
-   
+          includeMarkdown("documentation.Rmd")
+    )       
 ))
-
-
-# The purpose of the project, source of the data, and any pertinent information about the topic area are introduced. You may also want to include links to the code, or information about the team.
-=======
-))
->>>>>>> updated documentation.rmd file with current documentation
