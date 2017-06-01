@@ -5,6 +5,7 @@ library(plotly)
 library(shiny)
 
 source("./scripts/buildMap.R")
+source("./scripts/highestMortality.R")
 
 # Reads in relevant data
 cardiovascular <- read.csv("./cardiovascular.csv", stringsAsFactors = FALSE)
@@ -13,7 +14,7 @@ pulmonary <- read.csv("./pulmonary.csv", stringsAsFactors = FALSE)
 
 shinyServer(function(input, output) {
   
-  # Generates a dynamic UI that allows users to choose specific stratifications if ether
+  # Generates a dynamic UI that allows users to choose specific stratifications if either
   # Gender or Race/Ethnicity is selected
   output$specificGroups <- renderUI({
     if(input$stratification == "Gender") {
@@ -30,12 +31,14 @@ shinyServer(function(input, output) {
     }
   })
   
+
   # Creates the map for Diabetes
   output$diabetesMap <- renderPlotly({
     if (input$stratification == "Overall") {
       mapping <- BuildMap(diabetes, input$chosen.year, input$stratification, 23000)
     } else {
-      mapping <- BuildMap(diabetes, input$chosen.year, input$strat.specify, 23000)
+      diabetes.maximum <- HighestMortality(diabetes, input$strat.specify)
+      mapping <- BuildMap(diabetes, input$chosen.year, input$strat.specify, diabetes.maximum)
     }
   })
   
@@ -44,7 +47,8 @@ shinyServer(function(input, output) {
     if (input$stratification == "Overall") {
       mapping <- BuildMap(pulmonary, input$chosen.year, input$stratification, 14000)
     } else {
-      mapping <- BuildMap(pulmonary, input$chosen.year, input$strat.specify, 14000)
+      pulmonary.maxiumum <- HighestMortality(pulmonary, input$strat.specify)
+      mapping <- BuildMap(pulmonary, input$chosen.year, input$strat.specify, pulmonary.maxiumum)
     }
   })
 
@@ -53,7 +57,8 @@ shinyServer(function(input, output) {
     if (input$stratification == "Overall") {
       mapping <- BuildMap(cardiovascular, input$chosen.year, input$stratification, 82000)
     } else {
-      mapping <- BuildMap(cardiovascular, input$chosen.year, input$strat.specify, 82000)
+      cardiovascular.maximum <- HighestMortality(cardiovascular, input$strat.specify)
+      mapping <- BuildMap(cardiovascular, input$chosen.year, input$strat.specify, cardiovascular.maximum)
     }
   })
   
