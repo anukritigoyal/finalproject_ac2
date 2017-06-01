@@ -41,7 +41,6 @@ shinyUI(navbarPage(theme = shinytheme("cerulean"),
                ),
                
                mainPanel(
-                 
                  tabsetPanel(
                     tabPanel("Diabetes", br(), br(), plotlyOutput("diabetesMap"),
                              p("Diabetes is the seventh leading cause of death in the United States and its occurrence has almost doubled 
