@@ -27,6 +27,11 @@ shinyUI(navbarPage(theme = shinytheme("cerulean"),
                
                sidebarPanel(
                  
+                 radioButtons(inputId = "map.type", label = "Select Data Value Type",
+                              choices = list("Cases per 100,000" = "Crude Rate",
+                                             "Total count" = "Number")
+                              ),
+                 
                  sliderInput(inputId = "chosen.year", label = "Select Year", min = min(diabetes$YearStart),
                              max = max(diabetes$YearEnd), value = min(diabetes$YearStart), step = 1,
                              sep = ""

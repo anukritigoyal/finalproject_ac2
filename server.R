@@ -5,7 +5,7 @@ library(plotly)
 library(shiny)
 
 source("./scripts/buildMap.R")
-source("./scripts/highestMortality.R")
+# source("./scripts/highestMortality.R")
 source("./scripts/buildGraph.R")
 
 # Reads in relevant data
@@ -35,36 +35,32 @@ shinyServer(function(input, output) {
   output$overviewMap <- renderPlotly({
     graph <- BuildGraph(diabetes, pulmonary, cardiovascular, input$year)
   })
-  
 
   # Creates the map for Diabetes
   output$diabetesMap <- renderPlotly({
     if (input$stratification == "Overall") {
-      mapping <- BuildMap(diabetes, input$chosen.year, input$stratification, 23000, "Diabetes")
+      mapping <- BuildMap(diabetes, input$chosen.year, input$stratification, input$map.type, "Diabetes")
     } else {
-      diabetes.maximum <- HighestMortality(diabetes, input$strat.specify)
-      mapping <- BuildMap(diabetes, input$chosen.year, input$strat.specify, diabetes.maximum, "Diabetes")
+      mapping <- BuildMap(diabetes, input$chosen.year, input$strat.specify, input$map.type, "Diabetes")
     }
   })
   
   # Creates the map for Chronic Obstructive Pulmonary Disease
   output$pulmonaryMap <- renderPlotly({
     if (input$stratification == "Overall") {
-      mapping <- BuildMap(pulmonary, input$chosen.year, input$stratification, 14000, "COPD")
+      mapping <- BuildMap(pulmonary, input$chosen.year, input$stratification, input$map.type, "COPD")
     } else {
-      pulmonary.maxiumum <- HighestMortality(pulmonary, input$strat.specify)
-      mapping <- BuildMap(pulmonary, input$chosen.year, input$strat.specify, pulmonary.maxiumum, "COPD")
+      mapping <- BuildMap(pulmonary, input$chosen.year, input$strat.specify, input$map.type, "COPD")
     }
   })
 
   # Creates the map for Cardiovascular Disease
   output$cardiovascularMap <- renderPlotly({
     if (input$stratification == "Overall") {
-      mapping <- BuildMap(cardiovascular, input$chosen.year, input$stratification, 82000,
+      mapping <- BuildMap(cardiovascular, input$chosen.year, input$stratification, input$map.type, 
                           "Cardiovascular Disease")
     } else {
-      cardiovascular.maximum <- HighestMortality(cardiovascular, input$strat.specify)
-      mapping <- BuildMap(cardiovascular, input$chosen.year, input$strat.specify, cardiovascular.maximum,
+      mapping <- BuildMap(cardiovascular, input$chosen.year, input$strat.specify, input$map.type,
                           "Cardiovascular Disease")
     }
   })

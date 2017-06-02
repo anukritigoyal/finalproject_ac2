@@ -4,16 +4,30 @@ library(plotly)
 library(dplyr)
 
 # Function takes in the data set for the disease, the year and stratification of concern
-BuildMap <- function(data, data.year, data.stratification, max, graph.title) {
+BuildMap <- function(given.data, data.year, data.stratification, map.type, graph.title) {
   
   # Filters the data so that the dataframe consists of relevant data that will be used in the plot
-  data <- data %>% select(YearStart, LocationAbbr, LocationDesc, Topic, DataValue,
+  data <- given.data %>% select(YearStart, LocationAbbr, LocationDesc, Topic, DataValue,
                           DataValueType, DataValueUnit, Stratification1)
   
   data <- data %>% filter(YearStart == data.year) %>% filter(Stratification1 %in% data.stratification) %>%
-    filter(DataValueType == "Number") %>% filter(LocationAbbr != "US")
+    filter(DataValueType == map.type) %>% filter(LocationAbbr != "US")
   
   data <- data %>% group_by(LocationAbbr) %>% summarise(newData = sum(DataValue, na.rm = TRUE))
+  
+  # Finds the highest and lowest number of deaths in the given data, based on the selected stratification
+  data.range <- given.data %>%
+    select(YearStart, DataValue, DataValueType, Stratification1) %>%
+    filter(Stratification1 == data.stratification & DataValueType == map.type)
+  
+  if(any(is.na(data.range$DataValue))) {    # There are NA values
+    lowest.mortality <- 0
+    data.range <- na.omit(data.range)
+  } else {    # There are no NA values
+    data.range <- na.omit(data.range)
+    lowest.mortality <- min(data.range$DataValue)
+  }
+  highest.mortality <- max(data.range$DataValue)
   
   # Properties of the choropleth map
   g <- list (
@@ -33,7 +47,7 @@ BuildMap <- function(data, data.year, data.stratification, max, graph.title) {
       z = ~newData, color = ~newData,
       locations = ~LocationAbbr, colors = 'Blues'
     ) %>%
-    colorbar(title = "Cases", limits = c(0, max)) %>%
+    colorbar(title = "Cases", limits = c(lowest.mortality, highest.mortality)) %>%
     layout(
       title = paste0('Mortality in the United States due to ', graph.title),
       geo = g
