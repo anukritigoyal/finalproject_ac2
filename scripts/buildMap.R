@@ -13,7 +13,11 @@ BuildMap <- function(given.data, data.year, data.stratification, map.type, graph
   data <- data %>% filter(YearStart == data.year) %>% filter(Stratification1 %in% data.stratification) %>%
     filter(DataValueType == map.type) %>% filter(LocationAbbr != "US")
   
-  data <- data %>% group_by(LocationAbbr) %>% summarise(newData = sum(DataValue, na.rm = TRUE))
+  data <- data %>% group_by(LocationDesc) %>% summarise(newData = sum(DataValue, na.rm = TRUE))
+  
+  data$hover <- with(data, paste0("Mortality rate in ", data.year, " for ", graph.title, "<br>",
+                                  "in ", LocationDesc, "<br>",
+                                  "Data Stratification Group: ", data.stratification))
   
   # Finds the highest and lowest number of deaths in the given data, based on the selected stratification
   data.range <- given.data %>%
@@ -42,7 +46,7 @@ BuildMap <- function(given.data, data.year, data.stratification, map.type, graph
   map <- plot_geo(data, locationmode = 'USA-states') %>%
     add_trace(
       z = ~newData, color = ~newData,
-      locations = ~LocationAbbr, colors = 'Blues'
+      locations = ~LocationDesc, colors = 'Blues', text = ~hover
     ) %>%
     colorbar(title = "Cases", limits = c(min.count, max.count)) %>%
     layout(

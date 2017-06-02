@@ -4,7 +4,8 @@ library(plotly)
 library(dplyr)
 
 BuildGraph <- function(diabetes, pulmonary, cardio, year) {
-
+  
+  # Initial data files are rendered to provide data specific for this plot 
   diabetes.data <- diabetes %>% filter(YearStart == year, DataValueType == "Number", LocationDesc != "United States") %>% 
                     group_by(LocationDesc) %>% summarise(Diabetes = sum(DataValue, na.rm = TRUE))
   
@@ -17,6 +18,7 @@ BuildGraph <- function(diabetes, pulmonary, cardio, year) {
   data <- left_join(diabetes.data, cardiovascular.data, by = "LocationDesc")
   data <- left_join(data, pulmonary.data, by = "LocationDesc")
   
+  # Margins for the plot 
   m <- list (
     l = 125,
     r = 0,
@@ -25,6 +27,7 @@ BuildGraph <- function(diabetes, pulmonary, cardio, year) {
     pad = 4
   )
   
+  # Creates a stacked bar plot
   graph <- plot_ly(data, y = ~LocationDesc, x = ~Diabetes, type = 'bar', name = 'Diabetes') %>%
     add_trace(x = ~Cardiovascular, name = 'Cardiovascular') %>%
     add_trace(x = ~Pulmonary, name = 'Pulmonary') %>%
