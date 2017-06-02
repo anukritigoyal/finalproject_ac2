@@ -5,7 +5,7 @@ library(plotly)
 library(shiny)
 
 source("./scripts/buildMap.R")
-# source("./scripts/highestMortality.R")
+source("./scripts/highestMortality.R")
 source("./scripts/buildGraph.R")
 
 # Reads in relevant data
@@ -32,36 +32,56 @@ shinyServer(function(input, output) {
     }
   })
   
-  output$overviewMap <- renderPlotly({
+  # Creates the bar chart for Overview page
+  output$overviewChart <- renderPlotly({
     graph <- BuildGraph(diabetes, pulmonary, cardiovascular, input$year)
   })
 
   # Creates the map for Diabetes
   output$diabetesMap <- renderPlotly({
-    if (input$stratification == "Overall") {
-      mapping <- BuildMap(diabetes, input$chosen.year, input$stratification, input$map.type, "Diabetes")
-    } else {
-      mapping <- BuildMap(diabetes, input$chosen.year, input$strat.specify, input$map.type, "Diabetes")
+    if (input$stratification == "Overall" & input$map.type == "Number") { # Total count and overall
+      mapping <- BuildMap(diabetes, input$chosen.year, input$stratification, input$map.type, 
+                          "Diabetes", 23000)
+    } else if (input$stratification == "Overall" & input$map.type == "Crude Rate") { # Crude rate and overall
+      max.count <- HighestMortality(diabetes, input$stratification, input$map.type)
+      mapping <- BuildMap(diabetes, input$chosen.year, input$stratification, input$map.type, 
+                          "Diabetes", max.count)
+    } else { # total count and race/gender or crude rate and race/gender
+      max.count <- HighestMortality(diabetes, input$strat.specify, input$map.type)
+      mapping <- BuildMap(diabetes, input$chosen.year, input$strat.specify, input$map.type, 
+                          "Diabetes", max.count)
     }
   })
   
   # Creates the map for Chronic Obstructive Pulmonary Disease
   output$pulmonaryMap <- renderPlotly({
-    if (input$stratification == "Overall") {
-      mapping <- BuildMap(pulmonary, input$chosen.year, input$stratification, input$map.type, "COPD")
+    if (input$stratification == "Overall" & input$map.type == "Number") {
+      mapping <- BuildMap(pulmonary, input$chosen.year, input$stratification, input$map.type, 
+                          "COPD", 14000)
+    } else if (input$stratification == "Overall" & input$map.type == "Crude Rate") {
+      max.count <- HighestMortality(pulmonary, input$stratification, input$map.type)
+      mapping <- BuildMap(pulmonary, input$chosen.year, input$stratification, input$map.type, 
+                          "COPD", max.count)
     } else {
-      mapping <- BuildMap(pulmonary, input$chosen.year, input$strat.specify, input$map.type, "COPD")
+      max.count <- HighestMortality(pulmonary, input$strat.specify, input$map.type)
+      mapping <- BuildMap(pulmonary, input$chosen.year, input$strat.specify, input$map.type, 
+                          "COPD", max.count)
     }
   })
 
   # Creates the map for Cardiovascular Disease
   output$cardiovascularMap <- renderPlotly({
-    if (input$stratification == "Overall") {
+    if (input$stratification == "Overall" & input$map.type == "Number") {
       mapping <- BuildMap(cardiovascular, input$chosen.year, input$stratification, input$map.type, 
-                          "Cardiovascular Disease")
+                          "Cardiovascular Disease", 82000)
+    } else if (input$stratification == "Overall" & input$map.type == "Crude Rate") {
+      max.count <- HighestMortality(cardiovascular, input$stratification, input$map.type)
+      mapping <- BuildMap(cardiovascular, input$chosen.year, input$stratification, input$map.type, 
+                          "Cardiovascular Disease", max.count)
     } else {
-      mapping <- BuildMap(cardiovascular, input$chosen.year, input$strat.specify, input$map.type,
-                          "Cardiovascular Disease")
+      max.count <- HighestMortality(cardiovascular, input$strat.specify, input$map.type)
+      mapping <- BuildMap(cardiovascular, input$chosen.year, input$strat.specify, input$map.type, 
+                          "Cardiovascular Disease", max.count)
     }
   })
   

@@ -17,7 +17,7 @@ shinyUI(navbarPage(theme = shinytheme("cerulean"),
                  includeMarkdown("overview.Rmd") 
                ),
                mainPanel(
-                 plotlyOutput("overviewMap", width = "100%")
+                 plotlyOutput("overviewChart", width = "100%")
                )
              )
              
@@ -27,7 +27,7 @@ shinyUI(navbarPage(theme = shinytheme("cerulean"),
                
                sidebarPanel(
                  
-                 radioButtons(inputId = "map.type", label = "Select Data Value Type",
+                 radioButtons(inputId = "map.type", label = "Data Value Type",
                               choices = list("Cases per 100,000" = "Crude Rate",
                                              "Total count" = "Number")
                               ),

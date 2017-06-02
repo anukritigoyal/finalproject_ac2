@@ -21,7 +21,7 @@ BuildGraph <- function(diabetes, pulmonary, cardio, year) {
     l = 125,
     r = 0,
     t = 0,
-    b = 0,
+    b = 50,
     pad = 4
   )
   

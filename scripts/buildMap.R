@@ -4,7 +4,7 @@ library(plotly)
 library(dplyr)
 
 # Function takes in the data set for the disease, the year and stratification of concern
-BuildMap <- function(given.data, data.year, data.stratification, map.type, graph.title) {
+BuildMap <- function(given.data, data.year, data.stratification, map.type, graph.title, max.count) {
   
   # Filters the data so that the dataframe consists of relevant data that will be used in the plot
   data <- given.data %>% select(YearStart, LocationAbbr, LocationDesc, Topic, DataValue,
@@ -20,14 +20,11 @@ BuildMap <- function(given.data, data.year, data.stratification, map.type, graph
     select(YearStart, DataValue, DataValueType, Stratification1) %>%
     filter(Stratification1 == data.stratification & DataValueType == map.type)
   
-  if(any(is.na(data.range$DataValue))) {    # There are NA values
-    lowest.mortality <- 0
+  min.count <- 0
+  if (!any(is.na(data.range$DataValue))) {
     data.range <- na.omit(data.range)
-  } else {    # There are no NA values
-    data.range <- na.omit(data.range)
-    lowest.mortality <- min(data.range$DataValue)
+    min.count <- min(data.range$DataValue)
   }
-  highest.mortality <- max(data.range$DataValue)
   
   # Properties of the choropleth map
   g <- list (
@@ -47,9 +44,9 @@ BuildMap <- function(given.data, data.year, data.stratification, map.type, graph
       z = ~newData, color = ~newData,
       locations = ~LocationAbbr, colors = 'Blues'
     ) %>%
-    colorbar(title = "Cases", limits = c(lowest.mortality, highest.mortality)) %>%
+    colorbar(title = "Cases", limits = c(min.count, max.count)) %>%
     layout(
-      title = paste0('Mortality in the United States due to ', graph.title),
+      title = paste0('Mortality in the United States Due to ', graph.title),
       geo = g
     )
   return(map)
