@@ -28,8 +28,8 @@ BuildGraph <- function(diabetes, pulmonary, cardio, year) {
   graph <- plot_ly(data, y = ~LocationDesc, x = ~Diabetes, type = 'bar', name = 'Diabetes') %>%
     add_trace(x = ~Cardiovascular, name = 'Cardiovascular') %>%
     add_trace(x = ~Pulmonary, name = 'Pulmonary') %>%
-    layout(xaxis = list(title = 'Number of Mortalities'), yaxis = list(title = 'State'),
-           barmode = 'stack', margin = m)
+    layout(xaxis = list(title = 'Total Number of Mortalities'), yaxis = list(title = 'State'),
+           barmode = 'stack', margin = m, height = 800)
   
   return(graph)
 }

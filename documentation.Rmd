@@ -10,10 +10,12 @@ Created by: Anukriti Goyal, Kristine Ly, Tina Zhuang & Simin Huan
 
 The purpose of our project was to depict the relationship between the existence of chronic diseases and the different states that they exist in, as well as the different groups of people the diseases affect annually. We chose to focus on Diabetes, Chronic Obstructive Pulmonary Disease and Cardiovascular Disease as they had the most annual indicators of mortality in the United States. We were interested in seeing the change in the mortality as developments in healthcare advanced over the years and health officials' continuous actions lead to potential improvements in healthcare services.
 
-So far,there has been nothing but an increase in the mortality rates for these diseases. Even if the mortality rate does decrease, it does not necessarily mean that less patients are getting diagnosed with the disease. It is likely that as the population of the country increases, the number of cases and mortalities will only increase with time. All three of the diseases incur hefty costs but they can be avoided by adapting a healthy lifestyle.
-
 ### Data Source
 
 The data set that we worked with can be found [here](https://catalog.data.gov/dataset/u-s-chronic-disease-indicators-cdi-e50c9).
 
 The information was found in the Health section of Data.gov, however, it was initially published by the Centers for Disease Control and Prevention.
+
+### What Can We Do Next?
+
+So far, there has been nothing but an increase in the mortality rates for these diseases. Even if the mortality rate does decrease, it does not necessarily mean that less patients are getting diagnosed with the disease. It is very likely that as the population of the country and each state increases, the number of cases and mortalities will only increase with time. All three of the diseases incur hefty costs in terms of healthcare but also in the workforce as it leads to a decrease in productivity. These diseases can be prevented with the promotion of a healthy lifestyle and a healthy diet. Our findings are aimed, but not limited to health and government officials as our findings depict the states which need more attention towards alleviating the mortaliy rates as a result of these diseases. These diseases can be prevented by the promotion of a healthy lifestyle.
