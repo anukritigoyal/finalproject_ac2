@@ -3,7 +3,7 @@
 library(plotly)
 library(dplyr)
 
-BuildGraph <- function(diabetes, pulmonary, cardio, year) {
+BuildGraph <- function(diabetes, pulmonary, cardiovascular, year) {
   
   # Initial data files are rendered to provide data specific for this plot 
   diabetes.data <- diabetes %>% filter(YearStart == year, DataValueType == "Number", LocationDesc != "United States") %>% 

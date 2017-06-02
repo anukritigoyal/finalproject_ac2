@@ -5,6 +5,8 @@ library(shiny)
 library(markdown)
 library(plotly)
 
+diabetes <- read.csv("./diabetes.csv", stringsAsFactors = FALSE)
+
 shinyUI(navbarPage(theme = shinytheme("cerulean"),
   "Chronic Diseases in the US",
     tabPanel('Overview',
